@@ -1,0 +1,1 @@
+package com.pandinila.broadband_management.repository; import com.pandinila.broadband_management.entity.*; import org.springframework.data.jpa.repository.JpaRepository; import java.util.*; public interface EngineerRepository extends JpaRepository<Engineer,Long>{ List<Engineer> findByTeamId(Long teamId); }

@@ -1,0 +1,7 @@
+package com.pandinila.broadband_management.prediction;
+import com.pandinila.broadband_management.entity.*; import com.pandinila.broadband_management.entity.Enums.RiskLevel; import org.springframework.stereotype.Component; import java.util.*;
+@Component public class ComplaintPredictionEngine {
+ public PredictionResult evaluate(NetworkMetric m, double quality, boolean deteriorating, int previousComplaints){ int score=0; List<String> why=new ArrayList<>();
+  if(m.getLatency()>100){score+=20;why.add("Latency is above the configured threshold");} if(m.getPacketLoss()>5){score+=25;why.add("Packet loss is high");} if(m.getDownloadSpeed()<40){score+=20;why.add("Download speed is below expected level");} if(m.getJitter()>20){score+=10;why.add("Jitter is high");} if(m.getSignalStrength()<-70){score+=10;why.add("Signal strength is poor");} if(m.getDowntime()>30){score+=10;why.add("Recent downtime is elevated");} if(previousComplaints>=3){score+=5;why.add("Previous complaint history indicates recurring issues");} if(deteriorating){score+=10;why.add("Network quality has deteriorated recently");} if(quality<40){score+=10;why.add("Service quality is poor");}
+  score=Math.min(100,score); RiskLevel level=score>=70?RiskLevel.HIGH:score>=40?RiskLevel.MEDIUM:RiskLevel.LOW; return new PredictionResult(score,level,level==RiskLevel.HIGH?"Likely to raise a complaint within 2–3 days.":"No immediate complaint expected.",level==RiskLevel.HIGH?"2–3 days":"Monitor",why); }
+}

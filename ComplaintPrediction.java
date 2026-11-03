@@ -1,0 +1,6 @@
+package com.pandinila.broadband_management.entity;
+import jakarta.persistence.*; import java.time.Instant;
+@Entity @Table(name="complaint_predictions") public class ComplaintPrediction {
+ @Id @GeneratedValue(strategy=GenerationType.IDENTITY) private Long id; @ManyToOne(optional=false) @JoinColumn(name="customer_id") private Customer customer; private double riskScore; @Enumerated(EnumType.STRING) private Enums.RiskLevel riskLevel; @Column(length=500) private String prediction; private String predictionWindow; @Column(length=2000) private String reasons; private Instant predictedAt=Instant.now();
+ public Long getId(){return id;} public Customer getCustomer(){return customer;} public void setCustomer(Customer v){customer=v;} public double getRiskScore(){return riskScore;} public void setRiskScore(double v){riskScore=v;} public Enums.RiskLevel getRiskLevel(){return riskLevel;} public void setRiskLevel(Enums.RiskLevel v){riskLevel=v;} public String getPrediction(){return prediction;} public void setPrediction(String v){prediction=v;} public String getPredictionWindow(){return predictionWindow;} public void setPredictionWindow(String v){predictionWindow=v;} public String getReasons(){return reasons;} public void setReasons(String v){reasons=v;}
+}

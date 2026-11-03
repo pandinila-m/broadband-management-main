@@ -1,0 +1,1 @@
+package com.pandinila.broadband_management.prediction; import com.pandinila.broadband_management.entity.Enums.RiskLevel; import java.util.List; public record PredictionResult(double score, RiskLevel level, String prediction, String window, List<String> reasons) {}

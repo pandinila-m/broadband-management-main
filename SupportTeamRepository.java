@@ -1,0 +1,1 @@
+package com.pandinila.broadband_management.repository; import com.pandinila.broadband_management.entity.SupportTeam; import org.springframework.data.jpa.repository.JpaRepository; public interface SupportTeamRepository extends JpaRepository<SupportTeam,Long>{}
